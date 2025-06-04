@@ -19,7 +19,7 @@ NUM_ITERATIONS=35
 NOTIFICATION_FOLDER="/users/kbisenug/data2/.internal/notifications"
 DATA_FOLDERS=("/users/kbisenug/data2/pod1/acc-x/" "/users/kbisenug/data2/pod1/acc-y/" "/users/kbisenug/data2/pod1/acc-z")
 
-LOGS_REMOTE_PATHS=("/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/notification-aggregator-0-client.csv" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/notification-aggregator-0-client-results.csv" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/notification-aggregator-log-0.log" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/logs/RSPEngine.log" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/logs/CSPARQLWindow.log")
+LOGS_REMOTE_PATHS=("/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/notification-aggregator-0-client.csv" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/notification-aggregator-0-client-results.csv" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/notification-aggregator-log-0.log" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/logs/RSPEngine.log" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/with-notification-aggregator/util/logs/CSPARQLWindow.log", "/users/kbisenug/decentralized-stream-notifications-aggregator/logs/info.log", "/users/kbisenug/decentralized-stream-notifications-aggregator/logs/resource_used.csv")
 LOGS_LOCAL_PATH="/users/kbisenug/decentralized-stream-aggregator-evaluation-results/logs/"
 LOGS_LOCAL_PATH_REPLAYER="/users/kbisenug/replayer/replayer-log.csv"
 SSH_OPTIONS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -A -o ServerAliveInterval=120 -i ${PEM_FILE}"
@@ -72,6 +72,7 @@ for iteration in $(seq 1 $NUM_ITERATIONS); do
   echo "Starting aggregator..."
   run_ssh_command "$CLIENT_HOST" "$CLIENT_USER" "cd /users/kbisenug/decentralized-stream-aggregator-evaluation && npx ts-node initialise-LDES.ts" &
   run_ssh_command "$AGGREGATOR_HOST" "$AGGREGATOR_USER" "cd /users/kbisenug/decentralized-stream-notifications-aggregator && npx ts-node start_notification_aggregator_process.ts" &
+  sleep 15  # Wait 15 seconds for aggregator to initialize
 
   # Step 3: Start the client script
   echo "Starting client script..."
