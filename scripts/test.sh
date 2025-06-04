@@ -10,7 +10,7 @@ CLIENT_USER="kbisenug"
 AGGREGATOR_HOST="n078-22.wall1.ilabt.imec.be"
 AGGREGATOR_USER="kbisenug"
 
-PEM_FILE="/home/kush/Code/RSP/decentralized-stream-aggregator-evaluation-results/pem_file.pem"
+PEM_FILE="/users/kbisenug/solid-stream-aggregator-evaluation-results/pem_file.pem"
 BASTION_USER="fffkbisenug"
 BASTION_HOST="bastion.ilabt.imec.be"
 
@@ -19,9 +19,9 @@ NUM_ITERATIONS=35
 NOTIFICATION_FOLDER="/users/kbisenug/data2/.internal/notifications"
 DATA_FOLDERS=("/users/kbisenug/data2/pod1/acc-x/" "/users/kbisenug/data2/pod1/acc-y/" "/users/kbisenug/data2/pod1/acc-z")
 LOGS_REMOTE_PATHS=("/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/without-aggregator/util/without-aggregator-0-client.csv" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/without-aggregator/util/log-0.log" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/without-aggregator/util/result-0-client.csv" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/without-aggregator/util/logs/RSPEngine.log" "/users/kbisenug/decentralized-stream-aggregator-evaluation/src/increasing-number-of-clients/without-aggregator/util/logs/CSPARQLWindow.log")
-LOGS_LOCAL_PATH="/home/kush/Code/RSP/decentralized-stream-aggregator-evaluation-results/logs/"
+LOGS_LOCAL_PATH="/users/kbisenug/solid-stream-aggregator-evaluation-results/logs/"
 LOGS_LOCAL_PATH_REPLAYER="/users/kbisenug/replayer/replayer-log.csv"
-SSH_OPTIONS="-o HostKeyAlgorithms=+ssh-rsa -o PubKeyAcceptedAlgorithms=+ssh-rsa -A -o ServerAliveInterval=120 -i ${PEM_FILE}"
+SSH_OPTIONS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -o ServerAliveInterval=120 -i ${PEM_FILE}"
 
 # ProxyCommand as separate variable
 PROXY_COMMAND="ssh -i ${PEM_FILE} -oPort=22 ${BASTION_USER}@${BASTION_HOST} -W %h:%p"
