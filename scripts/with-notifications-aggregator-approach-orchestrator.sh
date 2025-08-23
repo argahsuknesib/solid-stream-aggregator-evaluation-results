@@ -10,7 +10,7 @@ CLIENT_USER="kbisenug"
 AGGREGATOR_HOST="n078-22.wall1.ilabt.imec.be"
 AGGREGATOR_USER="kbisenug"
 
-PEM_FILE="/home/kush/Code/RSP/decentralized-stream-aggregator-evaluation-results/pem_file.pem"
+PEM_FILE="/users/kbisenug/decentralized-stream-aggregator-evaluation-results/pem_file.pem"
 BASTION_USER="fffkbisenug"
 BASTION_HOST="bastion.ilabt.imec.be"
 
