@@ -97,6 +97,8 @@ for client_index in "${!CLIENT_SCRIPTS[@]}"; do
 
     # Step 2: Start the aggregator machine
     echo "Starting aggregator..."
+    echo "Killing any existing processes on required ports..."
+    run_ssh_command "$AGGREGATOR_HOST" "$AGGREGATOR_USER" "npx kill-port 8085 || true"
     run_ssh_command "$CLIENT_HOST" "$CLIENT_USER" "cd /users/kbisenug/decentralized-stream-aggregator-evaluation && npx ts-node initialise-LDES.ts" &
     run_ssh_command "$AGGREGATOR_HOST" "$AGGREGATOR_USER" "cd /users/kbisenug/decentralized-stream-notifications-aggregator && npx ts-node start_notification_aggregator_process.ts" &
     sleep 15  # Wait 15 seconds for aggregator to initialize
