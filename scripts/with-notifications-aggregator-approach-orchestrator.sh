@@ -37,6 +37,7 @@ LOGS_REMOTE_PATHS=("/users/kbisenug/decentralized-stream-aggregator-evaluation/s
 LOGS_LOCAL_PATH="/users/kbisenug/decentralized-stream-aggregator-evaluation-results/logs/"
 LOGS_LOCAL_PATH_REPLAYER="/users/kbisenug/replayer/replayer-log.csv"
 SSH_OPTIONS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -A -o ServerAliveInterval=120 -i ${PEM_FILE}"
+SCP_OPTIONS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -o ServerAliveInterval=120 -i ${PEM_FILE}"
 
 # ProxyCommand as separate variable
 PROXY_COMMAND="ssh -i ${PEM_FILE} -oPort=22 ${BASTION_USER}@${BASTION_HOST} -W %h:%p"
@@ -56,7 +57,7 @@ download_logs() {
 
   for remote_path in "${LOGS_REMOTE_PATHS[@]}"; do
     echo "Downloading ${remote_path} to ${local_path}/client${client_num}/${iteration}/"
-    scp ${SSH_OPTIONS} -J ${BASTION_USER}@${BASTION_HOST} "${CLIENT_USER}@${CLIENT_HOST}:${remote_path}" "${local_path}/client${client_num}/${iteration}/" 2>>"${local_path}/client${client_num}/${iteration}/download_errors.log" || \
+    scp ${SCP_OPTIONS} -J ${BASTION_USER}@${BASTION_HOST} "${CLIENT_USER}@${CLIENT_HOST}:${remote_path}" "${local_path}/client${client_num}/${iteration}/" 2>>"${local_path}/client${client_num}/${iteration}/download_errors.log" || \
       echo "Warning: ${remote_path} not found on remote host." >> "${local_path}/client${client_num}/${iteration}/download_errors.log"
   done
 }
@@ -67,7 +68,7 @@ download_replayer_log() {
   local client_num="$3"
   echo "Downloading replayer log to ${local_path}/client${client_num}/${iteration}/"
   mkdir -p "${local_path}/client${client_num}/${iteration}/"  # Added to ensure the directory exists
-  scp ${SSH_OPTIONS} -J ${BASTION_USER}@${BASTION_HOST} "${REPLAYER_USER}@${REPLAYER_HOST}:${LOGS_LOCAL_PATH_REPLAYER}" "${local_path}/client${client_num}/${iteration}/"
+  scp ${SCP_OPTIONS} -J ${BASTION_USER}@${BASTION_HOST} "${REPLAYER_USER}@${REPLAYER_HOST}:${LOGS_LOCAL_PATH_REPLAYER}" "${local_path}/client${client_num}/${iteration}/"
 }
 
 
